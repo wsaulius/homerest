@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="rev.gretty.homerest.entity">
+
+    <meta attribute = "class-description">
+        The class entity is used for bank account
+    </meta>
+
+    <class name="rev.gretty.homerest.entity.BankAccount" table="bank_account">
+
+        <id name="id" column="account_id">
+            <generator class="org.hibernate.id.UUIDGenerator"/>
+        </id>
+
+        <property name = "currentBalance" column = "current_balance" type = "java.math.BigDecimal"/>
+        <property name = "accountStatus" column = "account_status" type = "java.lang.Integer"/>
+        <property name = "accountNumber" column = "account_number" type="java.lang.String"/>
+        <property name = "currencyUnit" column = "currency_unit" type="java.lang.String"/>
+        <property name = "updateAt" column = "date_updated" type = "java.util.Calendar"/>
+    </class>
+
+    <sql-query name="SQL_GET_ACCOUNTS_BY_NUMBER">
+
+        <return alias="aa" class="rev.gretty.homerest.entity.BankAccount">
+        </return>
+        SELECT {aa.*} FROM bank_account aa WHERE aa.account_number= :account_number
+    </sql-query>
+
+    <sql-query name="SQL_UPDATE_ACCOUNTS_BY_NUMBER">
+
+        <return alias="aa" class="rev.gretty.homerest.entity.BankAccount">
+        </return>
+        UPDATE bank_account aa SET aa.account_status= :set_status, aa.date_updated= :date_updated, aa.current_balance =:balance
+        WHERE aa.account_number= :account_number
+    </sql-query>
+
+</hibernate-mapping>

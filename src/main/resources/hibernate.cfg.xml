@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+  <session-factory>
+
+    <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+
+    <!-- DB pool configuration in c3p0 will be revised -->
+    <property name="hibernate.c3p0.min_size">20</property>
+    <property name="hibernate.c3p0.max_size">100</property>
+    <property name="hibernate.c3p0.maxIdleTime">120</property>
+    <property name="hibernate.c3p0.acquire_increment">10</property>
+    <property name="hibernate.c3p0.max_statements">150</property>
+    <property name="hibernate.c3p0.validate">true</property>
+
+    <property name="hibernate.c3p0.testWhileIdle">true</property>
+    <property name="hibernate.c3p0.testConnectionOnCheckout">true</property>
+    <property name="hibernate.c3p0.testConnectionOnCheckin">true</property>
+    <property name="hibernate.c3p0.idleConnectionTestPeriod">300</property>
+    <property name="hibernate.c3p0.maxConnectionAge">10</property>
+    <property name="hibernate.c3p0.maxIdleTimeExcessConnections">60</property>
+
+    <property name="hibernate.connection.isolation">2</property>
+    <property name="org.hibernate.flushMode">ALWAYS</property>
+    <property name="hibernate.connection.autoReconnect">true</property>
+    <property name="hibernate.connection.autoReconnectForPools">true</property>
+    <property name="hibernate.connection.release_mode">after_statement</property>
+
+    <property name="hibernate.cache.use_query_cache">false</property>
+    <property name="hibernate.cache.use_second_level_cache">false</property>
+
+    <!-- TODO: Configure ehcache.xml separately-->
+    <!--property name="hibernate.cache.region.factory_class">
+    org.hibernate.cache.ehcache.EhCacheRegionFactory</property-->
+
+    <mapping resource="hibernate/user.hbm.xml" />
+    <mapping resource="hibernate/authority.hbm.xml" />
+    <mapping resource="hibernate/account.hbm.xml" />
+    <mapping resource="hibernate/transaction.hbm.xml" />
+    <mapping resource="hibernate/transfer.hbm.xml" />
+
+  </session-factory>
+</hibernate-configuration>

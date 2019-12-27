@@ -1,0 +1,22 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection) or
+# paste cURL into the file and request will be converted to HTTP Request format.
+#
+# Following HTTP Request Live Templates are available:
+
+POST http://localhost:9009/homerest/test
+Content-Type: application/json
+
+{
+  "credit": true,
+  "debit": false,
+  "id": "44c8ee84-c0d2-4013-a5c9-18743bce576e",
+  "transactionAmount": 468.00,
+  "transactionType": 1,
+  "transactionTime": 1577210003000,
+  "currencyUnit": "EUR",
+  "transactionStatus": 0,
+  "transactionFrom": "LT563500042914824919",
+  "transactionTo": "LT683500042934824939"
+}
+
+###

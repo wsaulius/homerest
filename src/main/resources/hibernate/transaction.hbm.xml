@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="rev.gretty.homerest.entity">
+
+    <meta attribute = "class-description">
+        The class entity is used for bank account transaction
+    </meta>
+
+    <class name="rev.gretty.homerest.entity.BankTransaction" table="bank_transaction">
+
+        <id name="id" column="transaction_id">
+            <generator class="org.hibernate.id.UUIDGenerator"/>
+        </id>
+
+        <property name = "transactionAmount" column = "transaction_amount" type = "java.math.BigDecimal"/>
+        <property name = "transactionType" column = "transaction_type" type = "java.lang.Byte"/>
+        <property name = "currencyUnit" column = "currency_unit" type="java.lang.String"/>
+        <property name = "transactionStatus" column = "transaction_status" type = "java.lang.Integer"/>
+        <property name = "transactionFrom" column = "transaction_from" type = "java.lang.String"/>
+        <property name = "transactionTo" column = "transaction_to" type = "java.lang.String"/>
+        <property name = "transactionTime" column = "transaction_time" type="java.util.Calendar"/>
+
+    </class>
+
+    <sql-query name="SQL_GET_ACCOUNTS_IN_TRANSACTION">
+
+        <return alias="transact" class="rev.gretty.homerest.entity.BankTransaction"/>
+        SELECT tt.transaction_id AS {transact.id}, tt.transaction_amount AS {transact.transactionAmount}, tt.transaction_type AS {transact.transactionType},
+        tt.currency_unit AS {transact.currencyUnit}, tt.transaction_status AS {transact.transactionStatus}, tt.transaction_from AS {transact.transactionFrom},
+        tt.transaction_to AS {transact.transactionTo}, tt.transaction_time AS {transact.transactionTime}
+        FROM bank_transaction tt JOIN bank_account aa
+        ON aa.account_number = tt.transaction_from OR aa.account_number = tt.transaction_to
+        WHERE tt.transaction_to != tt.transaction_from
+    </sql-query>
+
+    <sql-query name="SQL_UPDATE_ACCOUNTS_IN_MYSQLONLY">
+        UPDATE bank_account aa
+        SET aa.account_status= :set_status, aa.date_updated= :date_updated
+        INNER JOIN bank_transaction tt ON aa.account_number = tt.transaction_from OR aa.account_number = tt.transaction_to
+
+        WHERE aa.account_number IN ( :from_acc, :to_acc )
+    </sql-query>
+
+    <sql-query name="SQL_UPDATE_ACCOUNTS_IN_TRANSACTION">
+        UPDATE bank_account aa
+        SET aa.account_status= :set_status, aa.date_updated= :date_updated
+        WHERE aa.account_number IN ( :from_acc, :to_acc )
+    </sql-query>
+
+</hibernate-mapping>

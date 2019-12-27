@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="rev.gretty.homerest.entity">
+
+    <meta attribute = "class-description">
+        The class entity is used for bank account transfer: batch of transaction IDs (TODO)
+    </meta>
+
+    <class name="rev.gretty.homerest.entity.BankTransfer" table="bank_transfer">
+
+        <id name="id" column="transfer_id">
+            <generator class="org.hibernate.id.UUIDGenerator"/>
+        </id>
+
+        <property name = "transactionID" column = "transaction_id" type = "java.util.UUID"/>
+        <property name = "transferStatus" column = "transfer_status" type = "java.lang.Integer"/>
+
+    </class>
+</hibernate-mapping>

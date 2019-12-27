@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app version="3.1"
+		 xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+		 metadata-complete="false">
+
+	<!--servlet>
+		<servlet-name>initHome</servlet-name>
+		<servlet-class>rev.gretty.homerest.HomeRestServlet</servlet-class>
+	</servlet-->
+
+	<servlet>
+		<servlet-name>restTestingServlet</servlet-name>
+		<servlet-class>rev.gretty.homerest.servlet.HomeRestTransactTestingServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>acctTestingServlet</servlet-name>
+		<servlet-class>rev.gretty.homerest.servlet.HomeRestAccountsTestingServlet</servlet-class>
+	</servlet>
+
+	<!--servlet-mapping>
+		<servlet-name>initHome</servlet-name>
+		<url-pattern>/home/*</url-pattern>
+	</servlet-mapping-->
+
+	<servlet-mapping>
+		<servlet-name>restTestingServlet</servlet-name>
+		<url-pattern>/transactions/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>acctTestingServlet</servlet-name>
+		<url-pattern>/accounts/*</url-pattern>
+	</servlet-mapping>
+
+	<session-config>
+		<session-timeout>60</session-timeout>
+	</session-config>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+</web-app>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+
+    <persistence-unit name="homerest">
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>rev.gretty.homerest.entity.User</class>
+        <class>rev.gretty.homerest.entity.Authority</class>
+        <class>rev.gretty.homerest.entity.AuthorityType</class>
+        <class>rev.gretty.homerest.entity.BankAccount</class>
+        <class>rev.gretty.homerest.entity.BankTransaction</class>
+        <class>rev.gretty.homerest.entity.BankTransfer</class>
+
+        <properties>
+            <property name="homerest.jdbc.url" value="${hibernate.connection.url}"/>
+            <property name="homerest.jdbc.driver" value="${hibernate.connection.driver_class}"/>
+            <property name="homerest.jdbc.user" value="${hibernate.connection.username}"/>
+            <property name="homerest.jdbc.password" value="${hibernate.connection.password}"/>
+        </properties>
+
+    </persistence-unit>
+</persistence>
