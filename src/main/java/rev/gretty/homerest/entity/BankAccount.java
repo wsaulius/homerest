@@ -29,6 +29,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
+/**
+ * Entity for the Bank Account which is a POJO used for Hibernate and JSON
+ *
+ */
+
 @Entity
 @GenericGenerator( name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
 @Table(name = "bank_account")

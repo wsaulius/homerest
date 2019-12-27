@@ -17,6 +17,11 @@ import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
 
+/**
+ * Groovy class for {@code @Configuration} injection of Hibernate DDL settings
+ * into the class. The {@code @MetadataSources} represent DDL
+ */
+
 class CallingHibernateDDLConfig {
 
     private static Logger log = LoggerFactory.getLogger( CallingHibernateDDLConfig.class )
@@ -47,7 +52,13 @@ class CallingHibernateDDLConfig {
             return hibernateConfiguration
         }
 
-
+    /**
+     * Retrieve generalized entiry provided as a String entity name. All items of entity are collected
+     * unless specified otherwise
+     *
+     * @param provider The name of entity class provided by Guice injector
+     * @return Configuration object for the DDL script setup
+     */
     protected Object getMetadataDLL( final Provider<?> provider ) {
 
         Connection dbConnection = null;

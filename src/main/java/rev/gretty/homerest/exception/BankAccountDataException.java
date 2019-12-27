@@ -1,5 +1,9 @@
 package rev.gretty.homerest.exception;
 
+/**
+ * Customized exception class
+ */
+
 public class BankAccountDataException extends IllegalArgumentException {
 
     public BankAccountDataException(String string, Exception exception) {

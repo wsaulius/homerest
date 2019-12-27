@@ -8,6 +8,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * Utility class for Hibernate, should introduce Locale and TimeZone serialization
+ * (if needed)
+ *
+ */
+
 // TODO: Locale intro
 public class ByLocaleDateSerializerUtils extends JsonSerializer<Calendar> {
 

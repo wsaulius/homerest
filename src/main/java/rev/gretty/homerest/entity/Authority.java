@@ -10,6 +10,11 @@ import rev.gretty.homerest.persistence.AuthorityTypeConverterUtils;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * Entity for user profile auth linking to the account. Not implemented.
+ *
+ */
+
 @Entity
 @Table(name = "authority")
 public class Authority implements Serializable {

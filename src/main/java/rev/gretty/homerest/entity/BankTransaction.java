@@ -24,6 +24,11 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 
+/**
+ * Entity for the Bank Transacton which is a POJO used for Hibernate and JSON
+ *
+ */
+
 @Entity
 @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
 @Table(name = "bank_transaction")

@@ -20,6 +20,13 @@ import java.io.PrintWriter;
 
 import static com.google.inject.Guice.createInjector;
 
+/**
+ * REST handler for Jetty web application
+ *
+ * Customized binding is on application.env System environment variable
+ *
+ */
+
 @Singleton
 public class AuthorityHandler extends AbstractHandler
 {

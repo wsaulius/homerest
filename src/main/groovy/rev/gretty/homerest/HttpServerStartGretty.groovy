@@ -11,6 +11,7 @@ import org.eclipse.jetty.server.handler.ContextHandlerCollection
 import org.eclipse.jetty.server.handler.HandlerCollection
 import org.eclipse.jetty.servlet.ServletContextHandler
 import org.eclipse.jetty.servlet.ServletHolder
+import org.eclipse.jetty.webapp.WebAppContext
 import rev.gretty.homerest.handler.AccountHandler
 import rev.gretty.homerest.handler.TransactionHandler
 import rev.gretty.homerest.servlet.HomeRestAccountsTestingServlet
@@ -18,6 +19,11 @@ import rev.gretty.homerest.servlet.HomeRestTransactTestingServlet
 import rev.gretty.homerest.view.AccountServiceHandler
 
 import javax.net.ssl.*
+
+/**
+ * Main entry point for the API server. Configured by a set of properties in application.properties file.
+ *  The {@code @setDefaultPort} is injected by Guice setter injector for properties
+ */
 
 class HttpServerStartGretty extends Script {
 
@@ -63,6 +69,10 @@ class HttpServerStartGretty extends Script {
 
         QuickStartWebApp webapp = new QuickStartWebApp()
         webapp.setAutoPreconfigure(true)
+
+        String rootPath = jetty.getClass().getClassLoader().getResource(".").toString();
+        WebAppContext webapps = new WebAppContext(rootPath + "../../src/main/webapp", "");
+        jetty.setHandler(webapps);
 
         HandlerCollection allHandlers = new HandlerCollection()
         final Handler[] initHandlers

@@ -7,6 +7,11 @@ import rev.gretty.homerest.entity.AuthorityType;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
+/**
+ * Utility class for Hibernate
+ *
+ */
+
 @Converter
 public class AuthorityTypeConverterUtils implements AttributeConverter<AuthorityType, String> {
 

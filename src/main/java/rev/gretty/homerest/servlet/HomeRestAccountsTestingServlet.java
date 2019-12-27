@@ -10,11 +10,8 @@ import org.iban4j.IbanUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import rev.gretty.homerest.entity.BankAccount;
-import rev.gretty.homerest.entity.BankTransaction;
 import rev.gretty.homerest.service.IAccountService;
-import rev.gretty.homerest.service.ITransactionService;
 import rev.gretty.homerest.service.impl.AccountServiceImpl;
-import rev.gretty.homerest.service.impl.TransactionServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +21,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+
+/**
+ * Servlet for testing in Standalone API web server mode, used by explicit setting in @GuiceBoundConfigModule
+ * Initialized with or DEVT/PROD instance by default, switched on or off
+ *
+ */
 
 @WebServlet(name = "Accounts", value = "/accounts")
 public class HomeRestAccountsTestingServlet extends HttpServlet {
@@ -39,12 +42,11 @@ public class HomeRestAccountsTestingServlet extends HttpServlet {
     }
 
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        log.debug( "GET reached: " + this.getClass() );
+        log.debug("GET reached: " + this.getClass());
 
         final String egTestFrom = "LT563500042914824919";
         final String egTestTo = "LT683500042934824939";
@@ -79,7 +81,7 @@ public class HomeRestAccountsTestingServlet extends HttpServlet {
                 .append(" <option value=\"DEBIT\">DEBIT</option> ")
                 .append(" </select> ")
 */
-                .append( "<p>For account number enter 11 digit code template or full number")
+                .append("<p>For account number enter 11 digit code template or full number")
 
                 .append("				Digit code: \r\n")
                 .append("				<input type=\"text\" name=\"digitCode\" align=\"right\" />\r\n")
@@ -106,7 +108,7 @@ public class HomeRestAccountsTestingServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        BigDecimal amount = new BigDecimal( request.getParameter("amount")) ;
+        BigDecimal amount = new BigDecimal(request.getParameter("amount"));
         String transferFrom = request.getParameter("accountNr");
         final BankAccount bankAccount = new BankAccount();
 
@@ -122,86 +124,86 @@ public class HomeRestAccountsTestingServlet extends HttpServlet {
                 .append("		</head>\r\n")
                 .append("		<body>\r\n");
 
-        final String digitCode = request.getParameter("digitCode" );
-        if ( StringUtils.isNotBlank ( digitCode ) ) {
+        final String digitCode = request.getParameter("digitCode");
+        if (StringUtils.isNotBlank(digitCode)) {
 
             final Iban ibanReturned = new Iban.Builder()
                     .countryCode(CountryCode.LT)
-                    .bankCode( IBAN_BANK_CODE )
-                    .accountNumber( digitCode )
+                    .bankCode(IBAN_BANK_CODE)
+                    .accountNumber(digitCode)
                     .build();
 
-            IbanUtil.validate( ibanReturned.toString() );
-            bankAccount.setAccountNumber( ibanReturned.toString() );
+            IbanUtil.validate(ibanReturned.toString());
+            bankAccount.setAccountNumber(ibanReturned.toString());
 
         } else {
 
             IbanUtil.validate(transferFrom);
-            bankAccount.setAccountNumber( transferFrom );
+            bankAccount.setAccountNumber(transferFrom);
         }
 
 
-        bankAccount.setCurrentBalance( amount );
-        bankAccount.setCurrencyUnit( request.getParameter("currencies" ) );
+        bankAccount.setCurrentBalance(amount);
+        bankAccount.setCurrencyUnit(request.getParameter("currencies"));
 
-        bankAccount.setUpdateAt( null );
+        bankAccount.setUpdateAt(null);
 
-        if (amount != null && StringUtils.isNotBlank ( amount.toString() ) ) {
+        if (amount != null && StringUtils.isNotBlank(amount.toString())) {
             writer.append("	Account of balance " + amount + " " +
                     bankAccount.getCurrencyUnit() + ".\r\n");
             writer.append(
 
-            String.format("You successfully created an account of " + "%s %s in %s.\r\n",
-                    bankAccount.getCurrentBalance(),
-                    bankAccount.getCurrencyUnit(),
-                    bankAccount.getAccountNumber()
-            ));
+                    String.format("You successfully created an account of " + "%s %s in %s.\r\n",
+                            bankAccount.getCurrentBalance(),
+                            bankAccount.getCurrencyUnit(),
+                            bankAccount.getAccountNumber()
+                    ));
 
-            writer.append( "<pre id=\"json\">" + bankAccount.toString() +"</pre>" );
+            writer.append("<pre id=\"json\">" + bankAccount.toString() + "</pre>");
 
             try {
 
-                if (  iAccountService.putAccount( bankAccount ) ) {
+                if (iAccountService.putAccount(bankAccount)) {
 
-                    writer.append( "<p style=\"color:green;font-family:courier;\"><b><code>")
-                            .append( "All OK" + "\r\n" )
-                            .append( "</code></b></p>" );
+                    writer.append("<p style=\"color:green;font-family:courier;\"><b><code>")
+                            .append("All OK" + "\r\n")
+                            .append("</code></b></p>");
 
                 } else {
 
-                    writer.append( "<p style=\"color:red;font-family:courier;\"><b><code>")
-                            .append( "Failure" + "\r\n" )
-                            .append( "</code></b></p>" );
+                    writer.append("<p style=\"color:red;font-family:courier;\"><b><code>")
+                            .append("Failure" + "\r\n")
+                            .append("</code></b></p>");
 
                 }
 
             } catch (Exception e) {
 
-                if ( null != e && StringUtils.isNotBlank( e.getMessage() ) ) {
+                if (null != e && StringUtils.isNotBlank(e.getMessage())) {
 
-                    final String stackTheException = Throwables.getStackTraceAsString( e );
+                    final String stackTheException = Throwables.getStackTraceAsString(e);
 
                     writer.append(" Account create of " +
                             bankAccount.getCurrentBalance() + " "
                             + bankAccount.getCurrencyUnit()
                             + " failed with exception: ");
 
-                    writer.append( "<p style=\"color:red;font-family:courier;\"><b>")
-                            .append(  e.getMessage() +"\r\n" )
-                            .append( "</b></p>" );
+                    writer.append("<p style=\"color:red;font-family:courier;\"><b>")
+                            .append(e.getMessage() + "\r\n")
+                            .append("</b></p>");
 
-                    writer.append( "<p style=\"color:red;font-family:courier;\"><code>")
-                            .append( stackTheException )
-                            .append( "</code></p>" );
+                    writer.append("<p style=\"color:red;font-family:courier;\"><code>")
+                            .append(stackTheException)
+                            .append("</code></p>");
                 }
 
 //              writer.append( e.toString() );
             }
 
             writer
-                .append("	<form action=\"/get/accounts\" method=\"POST\">\r\n")
-                .append("		<input type=\"submit\" value=\"Check\" />\r\n")
-                .append("	</form>\r\n");
+                    .append("	<form action=\"/get/accounts\" method=\"POST\">\r\n")
+                    .append("		<input type=\"submit\" value=\"Check\" />\r\n")
+                    .append("	</form>\r\n");
 
         } else {
             writer.append("	You did not enter the correct data!\r\n");

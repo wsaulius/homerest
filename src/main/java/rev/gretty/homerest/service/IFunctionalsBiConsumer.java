@@ -3,6 +3,13 @@ package rev.gretty.homerest.service;
 import java.util.List;
 import java.util.function.BiConsumer;
 
+/**
+ * Service Interface, used by explicit setting in @GuiceBoundConfigModule
+ * Initialized with a DEVT/PROD instance by default
+ *
+ */
+
+
 public interface IFunctionalsBiConsumer< P , Q > {
 
     // BiConsumer for Dependent transactions (?? TODO: )

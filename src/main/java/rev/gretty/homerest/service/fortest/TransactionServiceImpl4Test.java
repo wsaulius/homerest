@@ -24,6 +24,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * Service Implementation class, configured by explicit setting in @GuiceBoundConfigModule
+ * Used for Testing profiles as a stand-alone or in integrations.
+ *
+ */
+
 @Singleton
 @Transactional
 public class TransactionServiceImpl4Test implements ITransactionService {

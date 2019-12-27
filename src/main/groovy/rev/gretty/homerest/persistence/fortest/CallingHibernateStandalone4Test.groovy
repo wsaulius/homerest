@@ -15,6 +15,11 @@ import javax.inject.Singleton
 
 import static com.google.inject.Guice.createInjector
 
+/**
+ * Groovy class using {@code @Inject} to inject Hibernate DDL configuration into
+ * into the class. The {@code @ICallingHibernateStandalone} interface allows it.
+ */
+
 @Slf4j
 @Singleton
 class CallingHibernateStandalone4Test implements ICallingHibernateStandalone {
@@ -33,10 +38,17 @@ class CallingHibernateStandalone4Test implements ICallingHibernateStandalone {
             generatedDDL = true
     }
 
+    /**
+     * Retrieve generalized entity provided as a String entity name. All items of entity are collected
+     * unless specified otherwise. The instance is used for test
+     *
+     * @param entity The name of entity class
+     * @return Collection of items within the entity
+     */
     def selectAll(final String entity ) {
 
         SessionFactory sessionFactory = HibernateSessionUtils.getSessionFactory()
-        final StringBuilder  longString = new StringBuilder()
+        final StringBuilder longString = new StringBuilder()
 
         Transaction transaction = null
         try {

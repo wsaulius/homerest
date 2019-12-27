@@ -21,6 +21,16 @@ import rev.gretty.homerest.service.impl.TransactionServiceImpl;
 
 import javax.inject.Singleton;
 
+/**
+ * The purpose of this Configuration module is dynamic configuration of by Injecting
+ * different services for different profiles: TEST and DEVT / PROD
+ *
+ * Customized binding is on application.env System environment variable
+ *
+ * In DEVT DDL schema drop is done at the startup time.
+ *
+ */
+
 @Singleton
 public class GuiceBoundConfigModule extends AbstractModule {
 

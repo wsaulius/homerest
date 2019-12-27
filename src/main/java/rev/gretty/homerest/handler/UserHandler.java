@@ -19,6 +19,13 @@ import rev.gretty.homerest.persistence.ICallingHibernateStandalone;
 
 import static com.google.inject.Guice.createInjector;
 
+/**
+ * REST handler for Jetty web application
+ *
+ * Customized binding is on application.env System environment variable
+ *
+ */
+
 @Singleton
 public class UserHandler extends AbstractHandler
 {

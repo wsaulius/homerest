@@ -15,6 +15,12 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import rev.gretty.homerest.persistence.ByLocaleDateSerializerUtils;
 
+/**
+ * Entity for the User profile which a POJO used for Hibernate and JSON
+ * It should allow secure and authenticated access later on, using LDAP
+ * or Database table credentials
+ */
+
 @Entity
 @Table(name = "user")
 public class User implements Serializable {

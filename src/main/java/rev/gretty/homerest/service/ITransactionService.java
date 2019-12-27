@@ -8,6 +8,12 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Service Interface, used by explicit setting in @GuiceBoundConfigModule
+ * Initialized with a DEVT/PROD instance by default
+ *
+ */
+
 @ImplementedBy(TransactionServiceImpl.class)
 public interface ITransactionService {
 

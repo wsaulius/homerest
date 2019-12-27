@@ -9,6 +9,11 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Utility class for Hibernate opening of Session for SQL transactions,
+ * 
+ */
+
 public class HibernateSessionUtils {
 
     private static Logger log = LoggerFactory.getLogger( HibernateSessionUtils.class );

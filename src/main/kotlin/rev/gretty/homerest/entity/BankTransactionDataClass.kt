@@ -3,6 +3,11 @@ package rev.gretty.homerest.entity
 import java.math.BigDecimal
 import java.util.*
 
+/**
+ * Mocked entities, experimental with Kotlin
+ *
+ */
+
 data class BankTransactionDataClass(val id: UUID,
                                     val transactionAmount: BigDecimal,
                                     val transactionType: Byte,
@@ -12,13 +17,6 @@ data class BankTransactionDataClass(val id: UUID,
                                     val transactionFrom: String,
                                     val transactionTo: String ) {
 
-    /*
-    constructor() : this("", BigDecimal.ZERO,
-            0, null,
-            null, null,
-            null, null) { }
-
-     */
     /*
 
         private val id: UUID? = null

@@ -11,6 +11,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
 
+/**
+ * Entity for the Bank Transfer which is a POJO used for Hibernate and JSON
+ * This is a collection linking Transaction and User Profile (Single Transfer
+ * can have multiple Transactions for the same user. Not implemented
+ */
+
 @Entity
 @Table(name = "bank_transfer")
 @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")

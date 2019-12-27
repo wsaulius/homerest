@@ -16,6 +16,13 @@ import rev.gretty.homerest.entity.BankAccount;
 import rev.gretty.homerest.service.IAccountService;
 import rev.gretty.homerest.service.fortest.AccountServiceImpl4Test;
 
+/**
+ * Web Context handler for testing in Standalone API web server mode,
+ * used by explicit setting in @GuiceBoundConfigModule
+ *
+ * Initialized with or DEVT/PROD instance by default, switched on or off
+ */
+
 @Singleton
 public class AccountServiceHandler extends AbstractHandler
 {

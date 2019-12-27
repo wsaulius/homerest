@@ -19,6 +19,12 @@ import javax.transaction.Transactional;
 import java.util.*;
 import java.util.concurrent.ConcurrentSkipListSet;
 
+/**
+ * Service Implementation class, configured by explicit setting in @GuiceBoundConfigModule
+ * Used for Testing profiles as a stand-alone or in integrations.
+ *
+ */
+
 @Singleton
 @Transactional
 public class AccountServiceImpl4Test implements IAccountService {

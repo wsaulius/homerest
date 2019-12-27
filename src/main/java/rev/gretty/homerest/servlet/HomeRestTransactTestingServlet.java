@@ -20,6 +20,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 
+/**
+ * Servlet for testing in Standalone API web server mode, used by explicit setting in @GuiceBoundConfigModule
+ * Initialized with or DEVT/PROD instance by default, switched on or off
+ *
+ */
+
 @WebServlet(name = "Transactions", value = "/transactions")
 public class HomeRestTransactTestingServlet extends HttpServlet {
 

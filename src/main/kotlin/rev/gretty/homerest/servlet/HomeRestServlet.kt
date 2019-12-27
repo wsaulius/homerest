@@ -13,6 +13,11 @@ import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
+/**
+ * Mocked Servlet version, experimental with Kotlin
+ *
+ */
+
 @WebServlet(name = "Homerest", value = ["/kotlin"])
 class HomeRestServlet constructor() : Logging, HttpServlet() {
 
