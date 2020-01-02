@@ -46,14 +46,14 @@
             <properties>
 
                 <application.env>devt</application.env>
-
-                <hibernate.connection.url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS test</hibernate.connection.url>
-                <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
-                <hibernate.connection.driver_class>org.h2.Driver</hibernate.connection.driver_class>
+				
+                <hibernate.connection.url>jdbc:mysql://localhost:3306/homerest?useSSL=false</hibernate.connection.url>
+                <hibernate.dialect>org.hibernate.dialect.MySQLDialect</hibernate.dialect>
+                <hibernate.connection.driver_class>com.mysql.cj.jdbc.Driver</hibernate.connection.driver_class>
                 <hibernate.connection.username>root</hibernate.connection.username>
                 <hibernate.connection.password>1My_sql!SQL</hibernate.connection.password>
                 <hibernate.connection.provider_class>org.hibernate.connection.C3P0ConnectionProvider</hibernate.connection.provider_class>
-
+				
             </properties>
 
         </profile>
@@ -72,9 +72,9 @@
                 <maven.test.skip>true</maven.test.skip>
                 <application.env>test</application.env>
 
-                <hibernate.connection.url>jdbc:mysql://localhost:3306/homerest?useSSL=false</hibernate.connection.url>
-                <hibernate.dialect>org.hibernate.dialect.MySQLDialect</hibernate.dialect>
-                <hibernate.connection.driver_class>com.mysql.cj.jdbc.Driver</hibernate.connection.driver_class>
+                <hibernate.connection.url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS test</hibernate.connection.url>
+                <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
+                <hibernate.connection.driver_class>org.h2.Driver</hibernate.connection.driver_class>
                 <hibernate.connection.username>root</hibernate.connection.username>
                 <hibernate.connection.password>1My_sql!SQL</hibernate.connection.password>
                 <hibernate.connection.provider_class>org.hibernate.connection.C3P0ConnectionProvider</hibernate.connection.provider_class>
@@ -730,8 +730,8 @@
 
                 <configuration>
 
-                    <driver>com.mysql.cj.jdbc.Driver</driver>
-                    <url>jdbc:mysql://localhost:3306/homerest?useSSL=false</url>
+                    <driver>${hibernate.connection.driver_class}</driver>
+                    <url>${hibernate.connection.url}</url>
                     <user>${hibernate.connection.username}</user>
                     <password>${hibernate.connection.password}</password>
 
